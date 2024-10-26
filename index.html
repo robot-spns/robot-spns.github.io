@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Proprioceptive Learning with Soft Polyhedral Networks">
+  <meta name="keywords"
+    content="Proprioception, shape reconstruction, soft robotics, state estimation, vision-based tactile sensing (VBTS)">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proprioceptive Learning with Soft Polyhedral Networks - SUSTech Design and Learning Research Group
+  </title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="css/bulma-slider.min.css">
+  <link rel="stylesheet" href="css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="icon" href="images/icon.jpg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="js/fontawesome.all.min.js"></script>
+  <script src="js/bulma-carousel.min.js"></script>
+  <script src="js/bulma-slider.min.js"></script>
+  <script src="js/index.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Proprioceptive Learning with Soft Polyhedral Networks</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=EBG1Tj4AAAAJ">Xiaobo Liu</a><sup>#</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://hanxudong.cc">Xudong Han</a><sup>#</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://faculty.sustech.edu.cn/?tagid=hongw&lang=en">Wei Hong</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://maindl.ancorasir.com">Fang Wan</a>*,
+              </span>
+              <span class="author-block">
+                <a href="https://bionicdl.ancorasir.com">Chaoyang Song</a>*
+              </span>
+            </div>
+
+            <div class="is-size-5 affiliation">
+              Southern University of Science and Technology
+            </div>
+            <div class="is-size-5 affiliation">
+              <sup>#</sup>Equal Contribution, *Corresponding authors
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="title is-5">The International Journal of Robotics Research</div>
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://doi.org/10.1177/02783649241238765"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://doi.org/10.1177/02783649241238765"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero is-light is-small">
+    <div class="hero-body">
+      <div class="container">
+        <div id="results-carousel-hero" class="carousel results-carousel">
+          <div class="item">
+            <video poster="" id="sim2real_prop" autoplay muted loop height="100%">
+              <source src="videos/sim2real_prop.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="cycle_test" autoplay muted loop height="100%">
+              <source src="videos/cycle_test.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="visco_sense_grasp" autoplay muted loop height="100%">
+              <source src="videos/visco_sense_grasp.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="competitive_grasp" autoplay muted loop height="100%">
+              <source src="videos/competitive_grasp.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="item">
+            <video poster="" id="impact_absorption_and_tactile_recon" autoplay muted loop height="100%">
+              <source src="videos/impact_absorption_and_tactile_recon.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Proprioception is the "sixth sense" that detects limb postures with motor neurons. It requires a natural
+              integration between the musculoskeletal systems and sensory receptors, which is challenging among modern
+              robots that aim for lightweight, adaptive, and sensitive designs at low costs in mechanical design and
+              algorithmic computation. Here, we present the Soft Polyhedral Network with an embedded vision for physical
+              interactions, capable of adaptive kinesthesia and viscoelastic proprioception by learning kinetic
+              features. This design enables passive adaptations to omni-directional interactions, visually captured by a
+              miniature high-speed motion tracking system embedded inside for proprioceptive learning. The results show
+              that the soft network can infer real-time 6D forces and torques with accuracies of 0.25/0.24/0.35 N and
+              0.025/0.034/0.006 Nm in dynamic interactions. We also incorporate viscoelasticity in proprioception during
+              static adaptation by adding a creep and relaxation modifier to refine the predicted results. The proposed
+              soft network combines simplicity in design, omni-adaptation, and proprioceptive sensing with high
+              accuracy, making it a versatile solution for robotics at a low material cost with more than 1 million use
+              cycles for tasks such as sensitive and competitive grasping and touch-based geometry reconstruction. This
+              study offers new insights into vision-based proprioception for soft robots in adaptive grasping, soft
+              manipulation, and human-robot interaction.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Soft Polyhedral Network design</h2>
+          <div class="content has-text-justified">
+            <p>
+              A polyhedron is generally understood as a solid geometry in three-dimensional space, featuring polygonal
+              faces connected by straight edges, including prisms, pyramids, and platonic solids. Inspired by recent
+              developments in soft robotics, we propose a generic design method by turning all edges of a polyhedron
+              into beam structures made from soft materials, then adding layers inside to form a network, followed by
+              redesigning the ends of all mid-layer edges as flexure joints to reduce inferences during deformation
+              while providing sufficient structural support in a compliant manner. The resultant designs exhibit
+              excellent adaptations in 3D, formulating a class of Soft Polyhedral Networks. In this study, we chose the
+              pyramid shape as the base design and modified it with two vertices on top.
+            </p>
+          </div>
+          <div class="content">
+            <img src="images/design_overview.jpg" width="1000px" alt="finger design"></img>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              We embedded a miniature motion-tracking system inside the Soft Polyhedral Network to mimic proprioception.
+              The system involves a high-speed camera of up to 330 frames per second (manually adjustable lens, Chengyue
+              WX605 from Weixinshijie) with a large viewing angle (170°) fixed on a mounting base inside the network and
+              a plate attached to the network's first layer with a fiducial marker (ArUco of 16 mm width) stuck to its
+              bottom. The camera is connected to a laptop via a USB cable, which processes the streamed images. The soft
+              network's spatial adaptation is expressed by its structural compliance, then filtered by the fiducial
+              marker's spatial movement inside, next captured by the high-speed camera as image features, and finally
+              encoded as a time series of dimensionally reduced 6D pose vector $\mathbf{D}_t = (D_x, D_y, D_z, D_{rx},
+              D_{ry}, D_{rz})_t$, namely, the translation and rotation of the marker relative to its initial pose $p_0$
+              before any deformation. The focal distance was manually adjusted and fixed such that the marker was in
+              focus at around 45 mm. We converted the captured RGB image to a gray image and applied an average filter
+              of a 5x5 kernel to smooth the image before feeding it to the ArUco detection module in OpenCV to detect
+              the pose of the fiducial marker.
+            </p>
+            <p>
+              We adopt the motion tracking solution for its simplicity, transferability, and low cost in mechanical
+              design and algorithmic computation for benchmarking purposes. For example, the motion tracking solution
+              can be easily transferred to Soft Polyhedral Networks other than the pyramid shapes, including the prism
+              and platonic ones. One can easily mount the Soft Polyhedral Networks on standard grippers by replacing
+              their current rigid fingertips. The system proposed in this study involves only three components: the Soft
+              Polyhedral Network, a miniature high-speed camera, and a pair of base frame and mounting base for
+              fixturing. Simplicity in design is the enabling factor of the proposed Soft Polyhedral Network, supporting
+              its robust adaptation with vision-based tactile sensing for robotic manipulation.
+            </p>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Analytical models for static viscoelasticity</h2>
+          <div class="content has-text-justified">
+            <p>
+              Viscoelasticity describes a material's characteristic of acting like a solid and a fluid, which is
+              universally applicable to robots made from soft matter. The metamaterial design and use of polyurethane
+              for fabrication make the Soft Polyhedral Network responsive to adaptation in a time-dependent and
+              rate-dependent manner. Mechanical characterization of viscoelastic behaviors can be categorized into
+              static and dynamic tests. Static viscoelasticity describes the material's response to a constant loading,
+              including time-changing force resulting from a constant deformation (relaxation) and time-changing
+              deformation resulting from a constant load (creep) over a period. Dynamic viscoelasticity describes the
+              material's response to cyclic or varying loading. In robotic manipulation tasks, the proposed soft gripper
+              undergoes varying loading while closing its fingers and a constant load/deformation while holding the
+              grasped object. Hence, static and dynamic viscoelasticity need to be considered in real robotic
+              applications. In this section, we formulate the analytical models of static viscoelasticity using the
+              Wiechert model for relaxation and the Kelvin model for creep.
+            </p>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              We model the stress relaxation process using a Wiechert model, composed of an elastic spring of stiffness
+              $k_e$ parallel to three Maxwell elements. Each Maxwell element consists of a Hookean spring of stiffness
+              $k$ and a Newtonian dashpot of viscosity $\eta$ connected in series, resulting in a characteristic time
+              $\tau=\eta/k$.
+            </p>
+          </div>
+          <div class="content has-text-centered">
+            <p>
+              $K_{rel}(t) = k_e + \sum_{i=1}^3 k_i\exp(-t/\tau_i)$
+            </p>
+          </div>
+          <div class="content">
+            <img src="images/wiechert_model.jpg" width="500px" alt="deform model"></img>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              We model the creep process using a Kelvin model, which gives a concise analytical expression similar to
+              the Wiechert model for relaxation. It is composed of a spring of stiffness 1/$m_g$ in series with three
+              Voigt elements. Each Voigt element consists of a Hookean spring of stiffness $1/m$ parallel to a Newtonian
+              dashpot of viscosity $1/\varphi$, resulting in a characteristic time $\tau=m/\varphi$.
+            </p>
+          </div>
+          <div class="content has-text-centered">
+            <p>
+              $C_{rel}(t) = m_g + \sum_{i=1}^3 m_i(1- \exp(-t/\tau_i))$
+            </p>
+          </div>
+          <div class="content">
+            <img src="images/kelvin_model.jpg" width="500px" alt="deform model"></img>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              To characterize the static behavior of viscoelasticity, we set up a experiment by mounting the soft
+              network on a vibration isolation table with a 6-axis force/torque sensor (Nano25 from ATI) in between. A
+              3D-printed, 5 mm thick, flat probe installed on the tool flange of a robot arm (UR10e from Universal
+              Robots) was used to horizontally compress the soft network's primary interaction face to a
+              certain depth $D_x$ and held the compression for 300 s. We recorded the marker pose and force/torque
+              readings at 30 Hz during the compression. We conducted the compression to three different depths. We found
+              the best-fitting Wiechert model using the least squares method. Such relaxation response characterizes the
+              soft network's viscoelastic behavior, demonstrating adaptations at both geometric and molecular levels.
+              The equilibrium modulus $K_{rel}(\infty)$ drops by 27$\%$ compared to the initial modulus $K_{rel}(0)$.
+              This result indicates that for grasping tasks where the fingers must constantly hold the object,
+              especially when the fingers are made from soft materials, the grasp planning algorithm should anticipate a
+              diminishing gripping force due to viscoelastic relaxation to avoid dropping.
+            </p>
+          </div>
+          <div class="content">
+            <img src="images/static_visc.jpg" width="1000px" alt="deform model"></img>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              Creep occurs in scenarios of weight compensation while holding an object, which usually occurs on the
+              network's secondary interaction face while holding an object. We placed a cylindrical rod of a 15 mm
+              radius at the center of the network's secondary interaction face. The soft network was tilted at $\gamma =
+              8^\circ$ to keep the secondary interaction face horizontal as the contact begins. By attaching different
+              weights to the cylindrical rod, we tested its viscoelastic responses to small, medium, and large static
+              forces of $F_y$ at 1.5, 3, and 5.9 N. We also found the best-fitting Kelvin model using the least squares
+              method. The equilibrium compliance $C_{crp}(\infty)$ increased by a significant 37$\%$ compared to the
+              initial compliance $C_{crp}(0)$. One can view creep as a reciprocal effect of relaxation. Both
+              characterize the viscoelastic behavior of the network's molecular adaptation during static interaction.
+              The experimental results agree well with the fact that the relaxation response is faster than creep.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Machine learning model for dynamic viscoelasticity</h2>
+          <div class="content has-text-justified">
+            <p>
+              Dedicating the full analytical model for dynamic viscoelasticity is challenging, unlike static behavior.
+              Based on findings on the viscoelasticity of the Soft Polyhedral Network, we propose a visual force
+              learning method to achieve viscoelastic proprioception by incorporating the fiducial marker's kinetic
+              motions representing the deformation rate. The marker inside the network works like a physical encoder to
+              convert passive, spatial deformations into a 6D pose vector $\mathbf{D}_t$, tracked by the miniature
+              motion tracking system inside the Soft Polyhedral Network with much reduced computational complexity.
+              Then, we developed a decoder model using Multi-layered Perceptrons (MLP) to infer the corresponding 6D
+              forces and torques ($F_x$, $F_y$, $F_z$, $T_x$, $T_y$, $T_z$) as the output. To reflect the speed of
+              interaction during physical contact, we added a velocity term $\dot{\mathbf{D}}_t=\delta
+              \mathbf{D}_t/\delta t$ to the model input by setting $\delta t$ = 15 ms (or five frames per interval at
+              330 fps) for a stable tracking. The MLP model has an input layer of 12 neurons, followed by three hidden
+              layers with 1,000, 100, and 50 neurons, respectively, and an output layer of 6 neurons.
+            </p>
+            <p>
+              The simplicity of design enabled us to collect 140,000 samples within 10 minutes by manually interacting
+              with the Soft Polyhedral Network at different heights and speeds. We collected 80,000 samples for training
+              and 60,000 for testing, including the frame-by-frame raw images, recognized marker poses, 6D forces and
+              torques from the ATI sensor as the true labels, and the corresponding timestamps. The dataset's maximum 6D
+              forces and torques are 20 N, 20 N, 10 N, 2 Nm, 2 Nm, and 0.5 Nm, respectively.
+            </p>
+          </div>
+          <div class="content">
+            <img src="images/visual_force_learn.jpg" width="1000px" alt="mlp model"></img>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              We trained three models to verify the speed of interactions' contribution in minimizing the predictions'
+              mean absolute errors (MAEs) for the 6D force and torque outputs. When using deformation $\mathbf{D}_t$ as
+              the only input, the model's mean absolute errors are 0.51 / 0.46 / 0.43 N ($F_x/F_y/F_z$) in forces and
+              0.049 / 0.062 / 0.01 Nm ($T_x/T_y/T_z$) in torques. However, after adding deformation rate
+              $\dot{\mathbf{D}}_t$ to the input features, the prediction errors are reduced by almost half to 0.25 /
+              0.24 / 0.35 N in forces and 0.025 / 0.034 / 0.006 Nm in torques. The minor improvement in $F_z$ could be
+              caused by the soft network's relatively less adaptiveness along the $z$-axis by design. Further adding
+              deformation acceleration $\dot{\mathbf{D}}_t$ to the input features leads to a slight improvement in
+              performance, suggesting that the ($\mathbf{D}_t, \dot{\mathbf{D}}_t$) inputs are sufficiently effective to
+              achieve enhanced visual force learning for viscoelastic proprioception.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Amphibious Tactile Sensing</h2>
+          <h3 class="title is-4">Benchmarking VBTS against Turbidity</h3>
+          <div class="content has-text-justified">
+            <p>
+              Our proposed rigidity-aware AMH method effectively transforms the visual perception process for
+              deformable
+              shape reconstruction into a marker-based pose recognition problem. Therefore, the benchmarking
+              of our
+              vision-based tactile sensing solution underwater is directly determined by successfully
+              recognizing the
+              fiducial marker poses used in our system under different turbidity conditions. Turbidity is an
+              optical
+              characteristic that measures the clarity of a water body and is reported in Nephelometric
+              Turbidity Units
+              (NTU). It influences the visibility of optical cameras for underwater inspection, inducing light
+              attenuation effects caused by the suspended particles. As one of the critical indicators for
+              characterizing water quality, there have been rich studies on the turbidity of large water
+              bodies
+              worldwide. For example, previous research shows that the Yangtze River's turbidity is measured
+              between
+              1.71 and 154 NTU.
+            </p>
+            <p>
+              We investigated the robustness of our proposed VBTS solution in different water clarity
+              conditions by
+              mixing condensed standard turbidity liquid with clear water to reach different turbidity
+              ratings. Our
+              proposed soft robotic finger is installed on a linear actuator in a tank filled with 56 liters
+              of clear
+              water. A probe is fixed under the soft robotic finger, inducing contact-based whole-body
+              deformation when
+              the finger is commanded to move downward. In our experiment, for the turbidity range between 0
+              and 40 NTU,
+              the raw images captured by our in-finger vision achieved a 100\% success rate in ArUco pose
+              recognition.
+              At 50 NTU turbidity, the first sign of failed marker pose recognition was observed when the most
+              considerable deformation was induced at 8 mm. Our experiment shows that this issue can be
+              alleviated using
+              simple image enhancement techniques to regain a 100% marker pose recognition success rate.
+              However, the
+              marker pose recognition performance under large-scale whole-body deformation quickly
+              deteriorated when the
+              turbidity reached 60 NTU and eventually became unusable at 70 NTU. Image enhancement could
+              effectively
+              increase the upper bound to 100 NTU to reach an utterly unusable marker pose recognition in
+              large-scale
+              whole-body deformation. For turbidity above 100 NTU, simple image enhancement provides limited
+              contributions to our system. Our experiment shows that when the turbidity reached 160 NTU, our
+              in-finger
+              system failed to recognize any ArUco pose underwater, even after image enhancement.
+            </p>
+          </div>
+          <div class="content">
+            <img src="images/turbidity.png" width="100%" alt="turbidity benchmark"></img>
+          </div>
+          <br />
+          <h3 class="title is-4">Underwater Exteroceptive Estimation of Object Shape</h3>
+          <div class="content has-text-justified">
+            <p>
+              While proprioception refers to being aware of one's movement, tactile sensing involves gathering
+              information about the external environment through the sense of touch. This section presents an
+              object
+              shape estimation approach by extending the PropSE method proposed to tactile sensing.
+            </p>
+            <p>
+              Since our soft finger can provide large-scale, adaptive deformation conforming to the object's
+              geometric
+              features through contact, we could infer shape-related contact information from the finger's
+              estimated
+              shape during the process. We assume the soft finger's contact patch coincides with that of the
+              object
+              during grasping. As a result, we can predict object surface topography using spatially
+              distributed contact
+              points on the touching interface. In this case, we used a parallel two-finger gripper (HandE
+              from Robotiq,
+              Inc.) attached to the wrist flange of a robotic manipulator (Franka Emika) through a 3D-printed
+              cylindrical rod for an extended range of motion. Our soft robotic fingers are attached to each
+              fingertip
+              of the gripper through a customized adapter fabricated by 3D printing. With the gripper
+              submerged
+              underwater, the system is programmed to sequentially execute a series of actions, including
+              gripping and
+              releasing the object and moving along a prescribed direction for a fixed distance to acquire
+              underwater
+              object shape information.
+            </p>
+          </div>
+          <div class="content">
+            <video poster="" id="vase_shape_sensing" autoplay muted loop controls width="100%">
+              <source src="videos/vase_shape_sensing.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              We present our method on actual data collected during the underwater tactile exploration
+              experiment. The
+              shape estimates at each cutting sectional plane are compared concerning the ground truth using
+              the Chamfer
+              Distance (CD). We chose five vertical cutting planes and one horizontal sectional plane for
+              reconstructed
+              object surface evaluation. For each cutting plane, a calibration error exists between the vase
+              and the
+              Hand-E gripper, leading to the expected gap between the reconstructed and ground truth points.
+              In addition
+              to the systematic error, we have observed a slight decrease in the CD metric values between
+              planes 1 and 5
+              compared to planes 2, 3, and 4, which could be attributed to the limitations of the soft finger
+              in
+              adapting to small objects with significant curvature. On the other hand, by employing tactile
+              exploration
+              actions with a relatively large contact area on the soft finger's surface, the shape estimation
+              of objects
+              similar in size to the vase can be accomplished more efficiently, typically within 8-12 touches.
+            </p>
+          </div>
+          <div class="content">
+            <img src="images/vase_shape_sensing.png" width="100%" alt="vase shape sensing"></img>
+          </div>
+          <br />
+          <h3 class="title is-4">Vision-based Tactile Grasping with an Underwater ROV</h3>
+          <div class="content has-text-justified">
+            <p>
+              Here, we provide a full-system demonstration using our vision-based soft robotic fingers on an
+              underwater
+              Remotely Operated Vehicle (ROV, FIFISH PRO V6 PLUS, QYSEA). It includes a single-DOF robotic
+              gripper,
+              which can be modified using the proposed soft fingers with customized adaptors. Our design
+              conveniently
+              introduced omni-directional adaptation capability to the gripper's existing functionality with
+              added
+              capabilities in real-time tactile sensing underwater. Using the in-finger images, we can use the
+              methods
+              proposed in this work to achieve real-time reconstruction of contact events on our soft robotic
+              finger.
+            </p>
+            <p>
+              Since our soft finger can provide large-scale, adaptive deformation conforming to the object's
+              geometric
+              features through contact, we could infer shape-related contact information from the finger's
+              estimated
+              shape during the process. We assume the soft finger's contact patch coincides with that of the
+              object
+              during grasping. As a result, we can predict object surface topography using spatially
+              distributed contact
+              points on the touching interface. In this case, we used a parallel two-finger gripper (HandE
+              from Robotiq,
+              Inc.) attached to the wrist flange of a robotic manipulator (Franka Emika) through a 3D-printed
+              cylindrical rod for an extended range of motion. Our soft robotic fingers are attached to each
+              fingertip
+              of the gripper through a customized adapter fabricated by 3D printing. With the gripper
+              submerged
+              underwater, the system is programmed to sequentially execute a series of actions, including
+              gripping and
+              releasing the object and moving along a prescribed direction for a fixed distance to acquire
+              underwater
+              object shape information.
+            </p>
+          </div>
+          <div class="content">
+            <video poster="" id="rov_grasping" autoplay muted loop controls width="100%">
+              <source src="videos/rov_grasping.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre>
+        <code>
+@article{guo2024proprioceptive,
+    title={Proprioceptive State Estimation for Amphibious Tactile Sensing},
+    author={Guo, Ning and Han, Xudong and Zhong, Shuqiao and Zhou, Zhiyuan and Lin, Jian and Dai, Jian S and Wan, Fang and Song, Chaoyang},
+    journal={IEEE Transactions on Robotics},
+    year={2024},
+    publisher={IEEE}
+}
+        </code>
+      </pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              Website template credit to
+              <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>,
+              and is licensed under a
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+    bulmaCarousel.attach('#results-carousel-hero', {
+      slidesToScroll: 1,
+      slidesToShow: 2,
+      autoplay: true,
+      loop: true,
+      infinite: true,
+      duration: 500,
+      autoplaySpeed: 10000,
+    });
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+</body>
+
+</html>
