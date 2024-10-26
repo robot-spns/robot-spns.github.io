@@ -170,7 +170,7 @@
             </p>
           </div>
           <div class="content">
-            <img src="images/design_overview.jpg" width="1000px" alt="finger design"></img>
+            <img src="images/design_overview.jpg" width="1000px" alt="design"></img>
           </div>
           <div class="content has-text-justified">
             <p>
@@ -238,7 +238,7 @@
             </p>
           </div>
           <div class="content">
-            <img src="images/wiechert_model.jpg" width="500px" alt="deform model"></img>
+            <img src="images/wiechert_model.jpg" width="500px" alt="wiechert model"></img>
           </div>
           <div class="content has-text-justified">
             <p>
@@ -254,7 +254,7 @@
             </p>
           </div>
           <div class="content">
-            <img src="images/kelvin_model.jpg" width="500px" alt="deform model"></img>
+            <img src="images/kelvin_model.jpg" width="500px" alt="kelvin model"></img>
           </div>
           <div class="content has-text-justified">
             <p>
@@ -273,7 +273,7 @@
             </p>
           </div>
           <div class="content">
-            <img src="images/static_visc.jpg" width="1000px" alt="deform model"></img>
+            <img src="images/static_visc.jpg" width="1000px" alt="static viscoelasticity"></img>
           </div>
           <div class="content has-text-justified">
             <p>
@@ -323,7 +323,7 @@
             </p>
           </div>
           <div class="content">
-            <img src="images/visual_force_learn.jpg" width="1000px" alt="mlp model"></img>
+            <img src="images/visual_force_learn.jpg" width="1000px" alt="visual force learning"></img>
           </div>
           <div class="content has-text-justified">
             <p>
@@ -344,177 +344,115 @@
     </div>
   </section>
 
-  <!-- <section class="section">
+  <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Amphibious Tactile Sensing</h2>
-          <h3 class="title is-4">Benchmarking VBTS against Turbidity</h3>
+          <h2 class="title is-3">Learning adaptive kinesthesia</h2>
+          <h3 class="title is-4">Stiffness distribution and FEM simulation</h3>
           <div class="content has-text-justified">
             <p>
-              Our proposed rigidity-aware AMH method effectively transforms the visual perception process for
-              deformable
-              shape reconstruction into a marker-based pose recognition problem. Therefore, the benchmarking
-              of our
-              vision-based tactile sensing solution underwater is directly determined by successfully
-              recognizing the
-              fiducial marker poses used in our system under different turbidity conditions. Turbidity is an
-              optical
-              characteristic that measures the clarity of a water body and is reported in Nephelometric
-              Turbidity Units
-              (NTU). It influences the visibility of optical cameras for underwater inspection, inducing light
-              attenuation effects caused by the suspended particles. As one of the critical indicators for
-              characterizing water quality, there have been rich studies on the turbidity of large water
-              bodies
-              worldwide. For example, previous research shows that the Yangtze River's turbidity is measured
-              between
-              1.71 and 154 NTU.
-            </p>
-            <p>
-              We investigated the robustness of our proposed VBTS solution in different water clarity
-              conditions by
-              mixing condensed standard turbidity liquid with clear water to reach different turbidity
-              ratings. Our
-              proposed soft robotic finger is installed on a linear actuator in a tank filled with 56 liters
-              of clear
-              water. A probe is fixed under the soft robotic finger, inducing contact-based whole-body
-              deformation when
-              the finger is commanded to move downward. In our experiment, for the turbidity range between 0
-              and 40 NTU,
-              the raw images captured by our in-finger vision achieved a 100\% success rate in ArUco pose
-              recognition.
-              At 50 NTU turbidity, the first sign of failed marker pose recognition was observed when the most
-              considerable deformation was induced at 8 mm. Our experiment shows that this issue can be
-              alleviated using
-              simple image enhancement techniques to regain a 100% marker pose recognition success rate.
-              However, the
-              marker pose recognition performance under large-scale whole-body deformation quickly
-              deteriorated when the
-              turbidity reached 60 NTU and eventually became unusable at 70 NTU. Image enhancement could
-              effectively
-              increase the upper bound to 100 NTU to reach an utterly unusable marker pose recognition in
-              large-scale
-              whole-body deformation. For turbidity above 100 NTU, simple image enhancement provides limited
-              contributions to our system. Our experiment shows that when the turbidity reached 160 NTU, our
-              in-finger
-              system failed to recognize any ArUco pose underwater, even after image enhancement.
+              We conducted a series of unidirectional compression experiments to estimate the stiffness distribution of
+              the Soft Polyhedral Network defined as force over displacement. The soft finger is mounted on a
+              high-performance force/torque sensor (Nano25 from ATI) on top of a custom test rig with two motorized
+              linear motions and one manually driven rotary motion. The force/torque sensor has a resolution of 1/48 N
+              for $F_x/F_y$, 1/16 N for $F_z$, 0.76 Nmm for $T_x/T_y$, and 0.38 Nmm for $T_z$. A probe compressed the
+              Soft Polyhedral Network horizontally at 3 mm/s to a pre-defined depth of 15 mm. We conducted the
+              experiments at three different pushing angles ($\alpha_0$, $\alpha_1$, and $\alpha_2$), where $\alpha_0 =
+              0^\circ$ is to compress the primary interaction face, $\alpha_1 = 45^\circ$ is to compress the edge
+              between the primary and secondary interaction faces, and $\alpha_2 = 90^\circ$ is to compress the
+              secondary interaction face. Meanwhile, we also adjust the compression height between $H_1$ and $H_4$. The
+              push displacement $\delta$ and reaction force $F$ were recorded to calculate the corresponding stiffness
+              $k = F/\delta$.
             </p>
           </div>
           <div class="content">
-            <img src="images/turbidity.png" width="100%" alt="turbidity benchmark"></img>
+            <img src="images/measure_stiffness.jpg" width="500px" alt="measure stiffness"></img>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              We used linear elastic elements and non-linear geometry in the FEM (Finite Element Method) simulations to
+              model the large adaptive deformation. Calibrated to match the experimental stiffness measurement, the FEM
+              simulation used Young's modulus of 12.05 MPa, Poisson ratio of 0.5, and density of 11.3 $\rm g/cm^3$. The
+              solid elements in FEM are 10-node quadratic tetrahedrons with hybrid formulation (C3D10H). The plate for
+              the fiducial marker is a rigid body with a high Young's modulus of 2,600 MPa. The Soft Polyhedral
+              Network's bottom is fixed. A total of about 13,000 elements were used in the simulation. The stiffness
+              distribution calculated with simulated data agrees well with the actual measurement, demonstrating a good
+              match between the simulation and the actual experiments. Both measurements share a similar trend where a
+              U-shape stiffness distribution suggests that the primary interaction face is highly adaptive with a
+              conforming geometry during physical interaction. A decreasing stiffness distribution suggests that the
+              edge and secondary interaction faces are moderately adaptive.
+            </p>
+          </div>
+          <div class="content">
+            <img src="images/stiffness_dist.jpg" width="500px" alt="stiffness dist"></img>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              We investigated the soft network's passive adaptation by placing a 3D-printed roller of 7 mm in diameter
+              with different weights (380$\sim$1,140 g) at various locations of the primary interaction face along the
+              horizontal direction. The roller, supported by a ball bearing on each end, always rolled toward an
+              equilibrium area to a complete stop. During the process, the Soft Polyhedral Network started deforming at
+              the point of contact with a tendency to enclose the roller. This tendency generates an equilibrium area
+              with the highest bending curvature between $L_2$ and $L_4$, causing the roller to rotate towards the
+              lowest point until an equilibrium state. The resultant spatial compliance is mechanically adaptive to
+              external loading, which we call "adaptive kinesthesia" of the Soft Polyhedral Network. Here, we define an
+              adaptive factor $\kappa$ to measure adaptive kinesthesia under an external force $f$ exerted at location
+              $l$ along the primary interaction face $S_i$ as
+            </p>
+          </div>
+          <div class="content has-text-centered">
+            <p>
+              $\kappa_i(f, l)= \frac{D_{max}(l')-D_{tip}}{L}$,
+            </p>
+          </div>
+          <div class="content has-text-justified">
+            <p>
+              where $D_{max}$ is the maximum displacement of the adaptive deformation, $l'$ is the location of maximum
+              displacement, and $D_{tip}$ is the tip displacement. The adaptive factor $\kappa$ reflects how well the
+              network encloses objects along the primary interaction face, with a higher value indicating a better
+              adaption. The segment towards the tip of the network is not as adaptive as the middle but behaves more
+              like a rigid fingernail, which is desirable to produce a firm grasp. The high stiffness at the tip leads
+              to greater adaptive compliance for the pyramid design of the soft network.
+            </p>
+          </div>
+          <div class="content">
+            <img src="images/adaptive_kinesthesia.jpg" width="1000px" alt="adaptive kinesthesia"></img>
           </div>
           <br />
-          <h3 class="title is-4">Underwater Exteroceptive Estimation of Object Shape</h3>
+          <h3 class="title is-4">Sim2Real proprioceptive learning</h3>
           <div class="content has-text-justified">
             <p>
-              While proprioception refers to being aware of one's movement, tactile sensing involves gathering
-              information about the external environment through the sense of touch. This section presents an
-              object
-              shape estimation approach by extending the PropSE method proposed to tactile sensing.
-            </p>
-            <p>
-              Since our soft finger can provide large-scale, adaptive deformation conforming to the object's
-              geometric
-              features through contact, we could infer shape-related contact information from the finger's
-              estimated
-              shape during the process. We assume the soft finger's contact patch coincides with that of the
-              object
-              during grasping. As a result, we can predict object surface topography using spatially
-              distributed contact
-              points on the touching interface. In this case, we used a parallel two-finger gripper (HandE
-              from Robotiq,
-              Inc.) attached to the wrist flange of a robotic manipulator (Franka Emika) through a 3D-printed
-              cylindrical rod for an extended range of motion. Our soft robotic fingers are attached to each
-              fingertip
-              of the gripper through a customized adapter fabricated by 3D printing. With the gripper
-              submerged
-              underwater, the system is programmed to sequentially execute a series of actions, including
-              gripping and
-              releasing the object and moving along a prescribed direction for a fixed distance to acquire
-              underwater
-              object shape information.
+              Kinesthesia is appreciated as the ability to detect active or passive limb movements about a joint, which
+              corresponds to the detection and reproduction of structural movement in the Soft Polyhedral Network during
+              spatial interactions. We propose a Sim2Real learning strategy to detect and reproduce the Soft Polyhedral
+              Network's adaptive kinesthesia, i.e., the passive proprioception of whole-body movement, using the
+              embedded miniature camera for sensing and FEM data for training. The geometry of the simulated soft
+              network is represented by a collection of 26 feature points $\mathbf{M}=\{N_i:(x_i,y_i,z_i)|i = 1, ...,
+              26\}$.
             </p>
           </div>
           <div class="content">
-            <video poster="" id="vase_shape_sensing" autoplay muted loop controls width="100%">
-              <source src="videos/vase_shape_sensing.mp4" type="video/mp4">
-            </video>
+            <img src="images/sim2real_error.jpg" width="400px" alt="sim2real error"></img>
           </div>
           <div class="content has-text-justified">
             <p>
-              We present our method on actual data collected during the underwater tactile exploration
-              experiment. The
-              shape estimates at each cutting sectional plane are compared concerning the ground truth using
-              the Chamfer
-              Distance (CD). We chose five vertical cutting planes and one horizontal sectional plane for
-              reconstructed
-              object surface evaluation. For each cutting plane, a calibration error exists between the vase
-              and the
-              Hand-E gripper, leading to the expected gap between the reconstructed and ground truth points.
-              In addition
-              to the systematic error, we have observed a slight decrease in the CD metric values between
-              planes 1 and 5
-              compared to planes 2, 3, and 4, which could be attributed to the limitations of the soft finger
-              in
-              adapting to small objects with significant curvature. On the other hand, by employing tactile
-              exploration
-              actions with a relatively large contact area on the soft finger's surface, the shape estimation
-              of objects
-              similar in size to the vase can be accomplished more efficiently, typically within 8-12 touches.
+              The average positional error grows as the soft network exhibits large-scale deformations during physical
+              interactions, ranging from 0.4 to less than 4 mm, with an overall average of 1.18 mm. We made real-time
+              predictions of its whole-body movement during physical interactions, demonstrating the power of Sim2Real
+              learning of the soft network's proprioception in adaptive kinesthesia enhanced by machine learning with
+              FEM.
             </p>
           </div>
           <div class="content">
-            <img src="images/vase_shape_sensing.png" width="100%" alt="vase shape sensing"></img>
-          </div>
-          <br />
-          <h3 class="title is-4">Vision-based Tactile Grasping with an Underwater ROV</h3>
-          <div class="content has-text-justified">
-            <p>
-              Here, we provide a full-system demonstration using our vision-based soft robotic fingers on an
-              underwater
-              Remotely Operated Vehicle (ROV, FIFISH PRO V6 PLUS, QYSEA). It includes a single-DOF robotic
-              gripper,
-              which can be modified using the proposed soft fingers with customized adaptors. Our design
-              conveniently
-              introduced omni-directional adaptation capability to the gripper's existing functionality with
-              added
-              capabilities in real-time tactile sensing underwater. Using the in-finger images, we can use the
-              methods
-              proposed in this work to achieve real-time reconstruction of contact events on our soft robotic
-              finger.
-            </p>
-            <p>
-              Since our soft finger can provide large-scale, adaptive deformation conforming to the object's
-              geometric
-              features through contact, we could infer shape-related contact information from the finger's
-              estimated
-              shape during the process. We assume the soft finger's contact patch coincides with that of the
-              object
-              during grasping. As a result, we can predict object surface topography using spatially
-              distributed contact
-              points on the touching interface. In this case, we used a parallel two-finger gripper (HandE
-              from Robotiq,
-              Inc.) attached to the wrist flange of a robotic manipulator (Franka Emika) through a 3D-printed
-              cylindrical rod for an extended range of motion. Our soft robotic fingers are attached to each
-              fingertip
-              of the gripper through a customized adapter fabricated by 3D printing. With the gripper
-              submerged
-              underwater, the system is programmed to sequentially execute a series of actions, including
-              gripping and
-              releasing the object and moving along a prescribed direction for a fixed distance to acquire
-              underwater
-              object shape information.
-            </p>
-          </div>
-          <div class="content">
-            <video poster="" id="rov_grasping" autoplay muted loop controls width="100%">
-              <source src="videos/rov_grasping.mp4" type="video/mp4">
+            <video poster="" id="sim2real_prop" autoplay muted loop controls width="100%">
+              <source src="videos/sim2real_prop.mp4" type="video/mp4">
             </video>
           </div>
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
