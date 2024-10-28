@@ -358,9 +358,9 @@
               linear motions and one manually driven rotary motion. The force/torque sensor has a resolution of 1/48 N
               for $F_x/F_y$, 1/16 N for $F_z$, 0.76 Nmm for $T_x/T_y$, and 0.38 Nmm for $T_z$. A probe compressed the
               Soft Polyhedral Network horizontally at 3 mm/s to a pre-defined depth of 15 mm. We conducted the
-              experiments at three different pushing angles ($\alpha_0$, $\alpha_1$, and $\alpha_2$), where $\alpha_0 =
-              0^\circ$ is to compress the primary interaction face, $\alpha_1 = 45^\circ$ is to compress the edge
-              between the primary and secondary interaction faces, and $\alpha_2 = 90^\circ$ is to compress the
+              experiments at three different pushing angles ($\alpha_0$, $\alpha_1$, and $\alpha_2$), where $\alpha_0$ =
+              0° is to compress the primary interaction face, $\alpha_1$ = 45° is to compress the edge
+              between the primary and secondary interaction faces, and $\alpha_2$ = 90° is to compress the
               secondary interaction face. Meanwhile, we also adjust the compression height between $H_1$ and $H_4$. The
               push displacement $\delta$ and reaction force $F$ were recorded to calculate the corresponding stiffness
               $k = F/\delta$.
@@ -373,9 +373,9 @@
             <p>
               We used linear elastic elements and non-linear geometry in the FEM (Finite Element Method) simulations to
               model the large adaptive deformation. Calibrated to match the experimental stiffness measurement, the FEM
-              simulation used Young's modulus of 12.05 MPa, Poisson ratio of 0.5, and density of 11.3 $\rm g/cm^3$. The
-              solid elements in FEM are 10-node quadratic tetrahedrons with hybrid formulation (C3D10H). The plate for
-              the fiducial marker is a rigid body with a high Young's modulus of 2,600 MPa. The Soft Polyhedral
+              simulation used Young's modulus of 12.05 MPa, Poisson ratio of 0.5, and density of 11.3 g/cm<sup>3</sup>. 
+              The solid elements in FEM are 10-node quadratic tetrahedrons with hybrid formulation (C3D10H). The plate
+              for the fiducial marker is a rigid body with a high Young's modulus of 2,600 MPa. The Soft Polyhedral
               Network's bottom is fixed. A total of about 13,000 elements were used in the simulation. The stiffness
               distribution calculated with simulated data agrees well with the actual measurement, demonstrating a good
               match between the simulation and the actual experiments. Both measurements share a similar trend where a
@@ -428,8 +428,7 @@
               spatial interactions. We propose a Sim2Real learning strategy to detect and reproduce the Soft Polyhedral
               Network's adaptive kinesthesia, i.e., the passive proprioception of whole-body movement, using the
               embedded miniature camera for sensing and FEM data for training. The geometry of the simulated soft
-              network is represented by a collection of 26 feature points $\mathbf{M}=\{N_i:(x_i,y_i,z_i)|i = 1, ...,
-              26\}$.
+              network is represented by a collection of 26 feature points.
             </p>
           </div>
           <div class="content">
