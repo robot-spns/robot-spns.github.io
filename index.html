@@ -26,6 +26,15 @@
   <script src="js/bulma-slider.min.js"></script>
   <script src="js/index.js"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZKF66BHD4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-YZKF66BHD4');
+  </script>
 </head>
 
 <body>
@@ -373,7 +382,7 @@
             <p>
               We used linear elastic elements and non-linear geometry in the FEM (Finite Element Method) simulations to
               model the large adaptive deformation. Calibrated to match the experimental stiffness measurement, the FEM
-              simulation used Young's modulus of 12.05 MPa, Poisson ratio of 0.5, and density of 11.3 g/cm<sup>3</sup>. 
+              simulation used Young's modulus of 12.05 MPa, Poisson ratio of 0.5, and density of 11.3 g/cm<sup>3</sup>.
               The solid elements in FEM are 10-node quadratic tetrahedrons with hybrid formulation (C3D10H). The plate
               for the fiducial marker is a rigid body with a high Young's modulus of 2,600 MPa. The Soft Polyhedral
               Network's bottom is fixed. A total of about 13,000 elements were used in the simulation. The stiffness
